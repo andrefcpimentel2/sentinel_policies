@@ -1,0 +1,43 @@
+# Policy that requires keys of secrets with name "postcode", "post-code", or "post_code"
+# to be a valid UK postcode
+# Function that validates post codes
+validate_post_codes = func() {
+  
+  # Print some information about the request
+  # Note that these messages will only be printed when the policy is violated
+  print("Namespace path:", namespace.path)
+  print("Request path:", request.path)
+  print("Request data:", request.data)
+  
+  # Test for "postcode" key
+  if "postcode" in keys(request.data) {
+    if request.data.postcode not matches "^((([BEGLMNS][1-9]\\d?)|(W[2-9])|((A[BL]|B[ABDHLNRST]|C[ABFHMORTVW]|D[ADEGHLNTY]|E[HNX]|F[KY]|G[LUY]|H[ADGPRSUX]|I[GMPV]|JE|K[ATWY]|L[ADELNSU]|M[EKL]|N[EGNPRW]|O[LX]|P[AEHLOR]|R[GHM]|S[AEGKL-PRSTWY]|T[ADFNQRSW]|UB|W[ADFNRSV]|YO|ZE)\\d\\d?)|(W1[A-HJKSTUW0-9])|(((WC[1-2])|(EC[1-4])|(SW1)|E1|W1)[ABEHMNPRVWXY]))(\\s*)?([0-9][ABD-HJLNP-UW-Z]{2}))$|^(GIR\\s?0AA)$|^(ASCN|BBND|BIQQ|FIQQ|PCRN|SIQQ|STHL|TDCU|TKCA)\\s?1ZZ$|^(BFPO\\s?\\d\\d?\\d?)$" {
+      print("Invalid postcode")
+      return false
+    }
+  }
+ 
+  # Test for "post_code" key
+  if "post_code" in keys(request.data) {
+    if request.data.post_code not matches "^((([BEGLMNS][1-9]\\d?)|(W[2-9])|((A[BL]|B[ABDHLNRST]|C[ABFHMORTVW]|D[ADEGHLNTY]|E[HNX]|F[KY]|G[LUY]|H[ADGPRSUX]|I[GMPV]|JE|K[ATWY]|L[ADELNSU]|M[EKL]|N[EGNPRW]|O[LX]|P[AEHLOR]|R[GHM]|S[AEGKL-PRSTWY]|T[ADFNQRSW]|UB|W[ADFNRSV]|YO|ZE)\\d\\d?)|(W1[A-HJKSTUW0-9])|(((WC[1-2])|(EC[1-4])|(SW1)|E1|W1)[ABEHMNPRVWXY]))(\\s*)?([0-9][ABD-HJLNP-UW-Z]{2}))$|^(GIR\\s?0AA)$|^(ASCN|BBND|BIQQ|FIQQ|PCRN|SIQQ|STHL|TDCU|TKCA)\\s?1ZZ$|^(BFPO\\s?\\d\\d?\\d?)$" {
+      print("Invalid postcode")
+      return false
+    }
+  }
+    
+  # Test for "post-code" key
+  if "post-code" in keys(request.data) {
+    if request.data.post-code not matches "^((([BEGLMNS][1-9]\\d?)|(W[2-9])|((A[BL]|B[ABDHLNRST]|C[ABFHMORTVW]|D[ADEGHLNTY]|E[HNX]|F[KY]|G[LUY]|H[ADGPRSUX]|I[GMPV]|JE|K[ATWY]|L[ADELNSU]|M[EKL]|N[EGNPRW]|O[LX]|P[AEHLOR]|R[GHM]|S[AEGKL-PRSTWY]|T[ADFNQRSW]|UB|W[ADFNRSV]|YO|ZE)\\d\\d?)|(W1[A-HJKSTUW0-9])|(((WC[1-2])|(EC[1-4])|(SW1)|E1|W1)[ABEHMNPRVWXY]))(\\s*)?([0-9][ABD-HJLNP-UW-Z]{2}))$|^(GIR\\s?0AA)$|^(ASCN|BBND|BIQQ|FIQQ|PCRN|SIQQ|STHL|TDCU|TKCA)\\s?1ZZ$|^(BFPO\\s?\\d\\d?\\d?)$" {
+      print("Invalid postcode")
+      return false
+    }
+  }
+    
+  return true
+    
+}
+    
+# Main Rule
+main = rule {
+  validate_post_codes()
+}
