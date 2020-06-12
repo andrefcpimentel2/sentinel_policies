@@ -2,6 +2,6 @@
    enforcement_level = "soft-mandatory"
 }
 
- policy "restrict_aws_region" {
-   enforcement_level = "soft-mandatory"
- }
+policy "enforce-mandatory-tags" {
+    enforcement_level = "hard-mandatory"
+}
